@@ -1,5 +1,7 @@
 package com.luizalabs.wish_list.domain.model;
 
+import com.luizalabs.wish_list.domain.exception.ProductAlreadyExistsException;
+import com.luizalabs.wish_list.domain.exception.WishlistOverflowException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -57,21 +59,29 @@ public class Wishlist {
         this.products = products;
     }
 
-    public void addProducts(Product product) {
+    public void addProduct(Product product) {
         checkDuplicateProduct(product);
         checkQuantityLimit();
         this.products.add(product);
     }
 
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+    }
+
     private void checkQuantityLimit() {
         if (this.products.size() >= MAX_PRODUCTS) {
-            throw new RuntimeException("Wishlist has reached its maximum limit of " + MAX_PRODUCTS + " products");
+            throw new WishlistOverflowException();
         }
     }
 
     private void checkDuplicateProduct(Product product) {
         if (this.products.contains(product)) {
-            throw new RuntimeException("Product already exists in the wishlist");
+            throw new ProductAlreadyExistsException();
         }
+    }
+
+    public boolean contains(Product product) {
+        return this.products.contains(product);
     }
 }
