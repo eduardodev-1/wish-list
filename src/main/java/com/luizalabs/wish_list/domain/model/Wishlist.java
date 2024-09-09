@@ -2,7 +2,6 @@ package com.luizalabs.wish_list.domain.model;
 
 import com.luizalabs.wish_list.domain.exception.ProductAlreadyExistsException;
 import com.luizalabs.wish_list.domain.exception.ProductDoesNotExistsException;
-import com.luizalabs.wish_list.domain.exception.ProductNotFoundException;
 import com.luizalabs.wish_list.domain.exception.WishlistOverflowException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
