@@ -7,10 +7,10 @@ import com.luizalabs.wish_list.domain.exception.WishlistNotFoundException;
 import com.luizalabs.wish_list.domain.model.Customer;
 import com.luizalabs.wish_list.domain.model.Product;
 import com.luizalabs.wish_list.domain.model.Wishlist;
+import com.luizalabs.wish_list.domain.repository.CustomerRepository;
+import com.luizalabs.wish_list.domain.repository.ProductRepository;
+import com.luizalabs.wish_list.domain.repository.WishlistRepository;
 import com.luizalabs.wish_list.infrastructure.api.mapper.WishlistMapper;
-import com.luizalabs.wish_list.infrastructure.repository.CustomerRepository;
-import com.luizalabs.wish_list.infrastructure.repository.ProductRepository;
-import com.luizalabs.wish_list.infrastructure.repository.WishlistRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,9 +18,7 @@ import java.util.Optional;
 @Service
 public class WishlistService {
     private final WishlistRepository wishlistRepository;
-
     private final ProductRepository productRepository;
-
     private final CustomerRepository customerRepository;
 
     public WishlistService(
