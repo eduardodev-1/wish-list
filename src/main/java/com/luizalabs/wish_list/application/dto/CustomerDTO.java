@@ -9,10 +9,6 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
-    public CustomerDTO(String customerId) {
-        this.id = customerId;
-    }
-
     public String getId() {
         return id;
     }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MongoWishlistRepository extends WishlistRepository, MongoRepository<Wishlist, String> {
+public interface MongoWishlistRepositoryImp extends WishlistRepository, MongoRepository<Wishlist, String> {
     Optional<Wishlist> findByCustomerId(String customerId);
 }

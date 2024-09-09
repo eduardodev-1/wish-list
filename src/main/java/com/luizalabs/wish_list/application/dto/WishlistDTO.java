@@ -1,7 +1,5 @@
 package com.luizalabs.wish_list.application.dto;
 
-import com.luizalabs.wish_list.domain.model.Customer;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +11,6 @@ public class WishlistDTO {
     private List<ProductDTO> products = new ArrayList<>();
 
     public WishlistDTO() {
-    }
-
-    public WishlistDTO(String customerId, String productId) {
-        this.customer = new CustomerDTO(customerId);
-        this.products = List.of(new ProductDTO(productId));
     }
 
     public String getId() {

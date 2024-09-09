@@ -8,10 +8,6 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(String productId) {
-        this.id = productId;
-    }
-
     public String getId() {
         return id;
     }
