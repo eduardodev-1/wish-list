@@ -31,12 +31,11 @@ public class WishlistServiceImp implements WishlistService {
         this.customerRepository = customerRepository;
     }
 
+    @Override
     public void addProduct(String customerId, String productId) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new CustomerNotFoundException(customerId));
+        Customer customer = findCustomer(customerId);
 
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException(productId));
+        Product product = findProduct(productId);
 
         Optional<Wishlist> wishlistOptional = wishlistRepository.findByCustomerId(customerId);
         Wishlist wishlist = wishlistOptional.orElse(new Wishlist());
@@ -47,24 +46,23 @@ public class WishlistServiceImp implements WishlistService {
         addProductToExistingWishlist(wishlist, product);
     }
 
+    @Override
     public void removeProduct(String customerId, String productId) {
-        customerRepository.findById(customerId)
-                .orElseThrow(() -> new CustomerNotFoundException(customerId));
+        findCustomer(customerId);
 
-        Wishlist wishlist = wishlistRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new WishlistNotFoundException(customerId));
+        Wishlist wishlist = findWishlistByCustomerId(customerId);
 
         wishlist.removeProduct(productId);
         wishlistRepository.save(wishlist);
     }
 
+    @Override
     public WishlistDTO getWishlist(String customerId) {
-        Wishlist wishlist = wishlistRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new WishlistNotFoundException(customerId));
-
+        Wishlist wishlist = findWishlistByCustomerId(customerId);
         return WishlistMapper.INSTANCE.toDTO(wishlist);
     }
 
+    @Override
     public boolean containsProduct(String customerId, String productId) {
         Wishlist wishlist = wishlistRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new WishlistNotFoundException(customerId));
@@ -73,6 +71,21 @@ public class WishlistServiceImp implements WishlistService {
                 .orElseThrow(() -> new ProductNotFoundException(productId));
 
         return wishlist.contains(product);
+    }
+
+    private Customer findCustomer(String customerId) {
+        return customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException(customerId));
+    }
+
+    private Product findProduct(String productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+    }
+
+    private Wishlist findWishlistByCustomerId(String customerId) {
+        return wishlistRepository.findByCustomerId(customerId)
+                .orElseThrow(() -> new WishlistNotFoundException(customerId));
     }
 
     private void addProductToExistingWishlist(Wishlist wishlist, Product product) {
