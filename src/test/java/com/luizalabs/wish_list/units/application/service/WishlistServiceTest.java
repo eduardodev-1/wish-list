@@ -2,6 +2,7 @@ package com.luizalabs.wish_list.units.application.service;
 
 import com.luizalabs.wish_list.application.dto.WishlistDTO;
 import com.luizalabs.wish_list.application.service.WishlistService;
+import com.luizalabs.wish_list.application.service.WishlistServiceImp;
 import com.luizalabs.wish_list.domain.exception.*;
 import com.luizalabs.wish_list.domain.model.Customer;
 import com.luizalabs.wish_list.domain.model.Product;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.*;
 public class WishlistServiceTest {
 
     @InjectMocks
-    private WishlistService wishlistService;
+    private WishlistServiceImp wishlistService;
 
     @Mock
     private WishlistRepository wishlistRepository;
