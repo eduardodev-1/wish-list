@@ -19,8 +19,14 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customerId) {
-        this.id = customerId;
+    public Customer(String id) {
+        this.id = id;
+    }
+
+    public Customer(String id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
     public String getId() {

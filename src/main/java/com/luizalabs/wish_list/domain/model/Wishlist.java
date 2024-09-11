@@ -36,6 +36,10 @@ public class Wishlist {
         this.products = List.of(new Product(productId));
     }
 
+    public Wishlist(String customerId) {
+        this.customer = new Customer(customerId);
+    }
+
     public String getId() {
         return id;
     }

@@ -9,6 +9,10 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
+    public CustomerDTO(String customerId) {
+        this.id = customerId;
+    }
+
     public String getId() {
         return id;
     }
@@ -31,5 +35,19 @@ public class CustomerDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CustomerDTO that = (CustomerDTO) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

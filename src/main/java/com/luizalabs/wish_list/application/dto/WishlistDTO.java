@@ -36,4 +36,18 @@ public class WishlistDTO {
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WishlistDTO that = (WishlistDTO) o;
+        return customer.equals(that.customer);
+    }
+
+    @Override
+    public int hashCode() {
+        return customer.hashCode();
+    }
 }
