@@ -21,7 +21,7 @@ public class MongoProductRepositoryTest {
 
     @Test
     void testFindById() {
-        double randomDouble = new Random().nextDouble(101.0);
+        double randomDouble = new Random().nextDouble() * 101;
         int randomInt = new Random().nextInt(101);
         Product product = new Product(null, "Produto" + randomInt, randomDouble);
         Product savedProduct = productRepository.save(product);

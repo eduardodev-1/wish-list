@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Random;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class WishlistControllerIntegrationTest {
 
     @Autowired
@@ -46,7 +48,7 @@ class WishlistControllerIntegrationTest {
     @Test
     void testAddProductSuccess() throws Exception {
         int randomInt = new Random().nextInt(101);
-        double randomDouble = new Random().nextDouble(101);
+        double randomDouble = new Random().nextDouble() * 101;
         Product product = productRepository.save(new Product(null, "Produto Teste " + randomInt, randomDouble));
         mockMvc.perform(post("/api/wishlist/{customerId}/add", customer.getId())
                         .param("productId", product.getId())
@@ -69,7 +71,7 @@ class WishlistControllerIntegrationTest {
     @Test
     void testGetWishlistSuccess() throws Exception {
         int randomInt = new Random().nextInt(101);
-        double randomDouble = new Random().nextDouble(101);
+        double randomDouble = new Random().nextDouble() * 101;
         Product product = productRepository.save(new Product(null, "Produto Teste " + randomInt, randomDouble));
         wishlistService.addProduct(customer.getId(), product.getId());
 
@@ -81,7 +83,7 @@ class WishlistControllerIntegrationTest {
     @Test
     void testContainsProductSuccess() throws Exception {
         int randomInt = new Random().nextInt(101);
-        double randomDouble = new Random().nextDouble(101);
+        double randomDouble = new Random().nextDouble() * 101;
         Product product = productRepository.save(new Product(null, "Produto Teste " + randomInt, randomDouble));
         wishlistService.addProduct(customer.getId(), product.getId());
 
